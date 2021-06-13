@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APISoP", "APISoP\APISoP.csproj", "{E7111C6A-0539-4367-8333-1A5ED72BAD48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.-Presentation", "1.-Presentation", "{FD3914E3-3FDC-4B7E-A193-AE3A11E57A32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APISoP.Repositories", "APISoP.Data\APISoP.Repositories.csproj", "{6FF0E387-BAF6-404E-AA6D-DA049E9ADB0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APiSoP.Services", "APiSoP.Domain\APiSoP.Services.csproj", "{E36F30C8-E8E8-4471-952D-8FB298485160}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSoP.RegisterServices", "ApiSoP.RegisterServices\ApiSoP.RegisterServices.csproj", "{9A09BB98-CD13-4097-8AEE-FB7A9EA3A13E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.-Drain", "2.-Drain", "{82C7FF73-498C-4EC5-9334-4304D2ADBCE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APISoP.CrossCutting", "APISoP.CrossCutting\APISoP.CrossCutting.csproj", "{32758639-E5D4-44EA-BBC9-61395194DDBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7111C6A-0539-4367-8333-1A5ED72BAD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7111C6A-0539-4367-8333-1A5ED72BAD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7111C6A-0539-4367-8333-1A5ED72BAD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7111C6A-0539-4367-8333-1A5ED72BAD48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF0E387-BAF6-404E-AA6D-DA049E9ADB0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF0E387-BAF6-404E-AA6D-DA049E9ADB0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF0E387-BAF6-404E-AA6D-DA049E9ADB0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF0E387-BAF6-404E-AA6D-DA049E9ADB0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E36F30C8-E8E8-4471-952D-8FB298485160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E36F30C8-E8E8-4471-952D-8FB298485160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E36F30C8-E8E8-4471-952D-8FB298485160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E36F30C8-E8E8-4471-952D-8FB298485160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A09BB98-CD13-4097-8AEE-FB7A9EA3A13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A09BB98-CD13-4097-8AEE-FB7A9EA3A13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A09BB98-CD13-4097-8AEE-FB7A9EA3A13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A09BB98-CD13-4097-8AEE-FB7A9EA3A13E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32758639-E5D4-44EA-BBC9-61395194DDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32758639-E5D4-44EA-BBC9-61395194DDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32758639-E5D4-44EA-BBC9-61395194DDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32758639-E5D4-44EA-BBC9-61395194DDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7111C6A-0539-4367-8333-1A5ED72BAD48} = {FD3914E3-3FDC-4B7E-A193-AE3A11E57A32}
+		{6FF0E387-BAF6-404E-AA6D-DA049E9ADB0B} = {82C7FF73-498C-4EC5-9334-4304D2ADBCE6}
+		{E36F30C8-E8E8-4471-952D-8FB298485160} = {82C7FF73-498C-4EC5-9334-4304D2ADBCE6}
+		{9A09BB98-CD13-4097-8AEE-FB7A9EA3A13E} = {82C7FF73-498C-4EC5-9334-4304D2ADBCE6}
+		{32758639-E5D4-44EA-BBC9-61395194DDBD} = {82C7FF73-498C-4EC5-9334-4304D2ADBCE6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F782E8FE-0CAA-43E9-88A3-AE09DC99D235}
+	EndGlobalSection
+EndGlobal
