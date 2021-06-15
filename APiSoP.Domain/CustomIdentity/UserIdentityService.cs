@@ -39,5 +39,7 @@ namespace APiSoP.Services.CustomIdentity
         public Guid? StoreMoneyId => throw new NotImplementedException();
           
         public string StoreMoneyName => throw new NotImplementedException();
+
+        public Guid? MembershipId => Guid.Parse(_httpContext.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "MembershipId").Value);
     }
 }

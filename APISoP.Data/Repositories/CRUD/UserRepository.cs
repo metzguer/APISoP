@@ -41,10 +41,12 @@ namespace APISoP.Data.Repositories.CRUD
             return await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
         }
 
-        public async Task<User> GetUserForLogin(Guid guid)
-        {
-            return await _context.Users.Include( s => s.Store).ThenInclude(e=>e.Enterprise).Include( p => p.Profile).FirstOrDefaultAsync(x => x.UserId == guid);
-        }
+        public async Task<User> GetUserForLogin(Guid guid) => await _context.Users
+            .Include( s => s.Store)
+            .ThenInclude(e=>e.Enterprise)
+            .Include( p => p.Profile)
+            .FirstOrDefaultAsync(x => x.UserId == guid);
+       
 
         public async Task Remove(Guid guid)
         {

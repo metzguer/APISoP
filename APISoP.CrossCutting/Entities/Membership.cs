@@ -1,5 +1,6 @@
 ﻿using APISoP.CrossCutting.Types;
-using System; 
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations; 
 
 namespace APISoP.CrossCutting.Entities
@@ -13,6 +14,6 @@ namespace APISoP.CrossCutting.Entities
         public TypeMembership TypeMembership { get; set; }
  
         //relations   
-        public virtual Enterprise Enterprise { get; set; }
+        public virtual IEnumerable<Enterprise> Enterprise { get; set; }
     }
 }

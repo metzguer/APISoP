@@ -17,5 +17,6 @@ namespace APiSoP.Services.CustomIdentity
         Guid? StoreMoneyId { get; }
         string StoreName { get; }
         string StoreMoneyName { get; }
+        Guid? MembershipId { get; }
     }
 }

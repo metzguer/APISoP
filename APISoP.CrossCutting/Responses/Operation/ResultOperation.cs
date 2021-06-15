@@ -9,8 +9,9 @@ namespace APISoP.CrossCutting.Responses.Operation
     public class ResultOperation
     {
         public bool Success { get; set; }
-        public ICollection<ItemError> Errors { get; set; }
         public string Message { get; set; }
+        public ICollection<ItemError> Errors { get; set; }
+        
         public ResultOperation()
         {
             Success = false;
@@ -21,10 +22,10 @@ namespace APISoP.CrossCutting.Responses.Operation
     public class ResultOperation<T>
     {
         public bool Success { get; set; }
-        public ICollection<ItemError> Errors { get; set; }
-        public T Result { get; set; }
         public string Message { get; set; }
-
+        public T Result { get; set; }
+        public ICollection<ItemError> Errors { get; set; }
+         
         public ResultOperation()
         {
             Result = default(T);

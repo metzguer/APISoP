@@ -25,6 +25,9 @@ namespace APiSoP.Domain.Services
             try
             {
                 entity.EnterpriseId = Guid.NewGuid();
+                entity.Created = DateTime.Now;
+                entity.Updated = DateTime.Now; 
+
                 await _enterpriseRepository.Add(entity);
                 result.Result = entity;
                 result.Success = true; 
@@ -120,7 +123,9 @@ namespace APiSoP.Domain.Services
             var result = new ResultOperation<Enterprise>();
 
             try
-            { 
+            {
+                entity.Updated = DateTime.Now;
+
                 await _enterpriseRepository.Update(entity);
                 result.Result = entity;
                 result.Success = true;

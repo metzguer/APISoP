@@ -51,7 +51,8 @@ namespace APISoP.UsersAuthManager.Services
                     new Claim("EnterpriseId", user.Store.EnterpriseId.ToString()),
                     new Claim("EnterpriseName", user.Store.Enterprise.Name),
                     new Claim("SroreId", user.StoreId.ToString()),
-                    new Claim("StoreName", user.Store.StoreName), 
+                    new Claim("StoreName", user.Store.StoreName),
+                    new Claim("MembershipId", user.Store.Enterprise.MembershipId.ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
