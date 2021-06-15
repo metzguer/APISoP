@@ -10,9 +10,7 @@ namespace APISoP.UsersAuthManager.Models
     {
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
-        [Required]
-        public string Username { get; set; }
+        public string Email { get; set; } 
         [Required]
         public string EnterpriseName { get; set; }
         [Required]

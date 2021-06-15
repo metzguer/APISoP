@@ -58,7 +58,7 @@ namespace APISoP.Controllers
 
             if (ModelState.IsValid) {
 
-                string exist = await Validations(user.Email, user.Username);
+                string exist = await Validations(user.Email);
                 if (exist != null) {
                     response.Success = false;
                     response.Errors.Add(exist);
@@ -66,7 +66,7 @@ namespace APISoP.Controllers
                 }
 
                 //create user
-                var userApp = new ApplicationUser {Email = user.Email, UserName = user.Username}; 
+                var userApp = new ApplicationUser {Email = user.Email, UserName = user.Email}; 
                 var userCreated = await _userManager.CreateAsync(userApp, user.Password);
 
                 if (!userCreated.Succeeded)
@@ -218,8 +218,7 @@ namespace APISoP.Controllers
                     response.Errors.Add("Inicio de sesión no valido");
                     return BadRequest(response);
                 }
-
-
+                 
                 //create resources for new enterprises
 
                 response.Token = createdToken.Token;
@@ -311,20 +310,13 @@ namespace APISoP.Controllers
             return await Task.Run(() => errors);
         }
 
-        private async Task<string> Validations(string email, string username) {
+        private async Task<string> Validations(string email) {
 
             var existUser = await _userManager.FindByEmailAsync(email);
             if (existUser != null)
             {
                 return $"Ya existe un usuario registrado con el email {email}";
-            }
-
-            var existUsername = await _userManager.FindByNameAsync(username);
-            if (existUsername != null)
-            {
-                return $"Ya existe un usuario registrado con el usuario {username}";
-            }
-
+            } 
             return null;
         }
 

@@ -29,7 +29,7 @@ namespace APISoP.Data.Repositories.CRUD
 
         public async Task<Store> GetById(Guid guid)
         {
-            return await _context.Stores.FirstOrDefaultAsync(x => x.EnterpriseId == guid);
+            return await _context.Stores.FirstOrDefaultAsync(x => x.StoreId == guid);
         }
 
         public async Task Remove(Guid guid)
