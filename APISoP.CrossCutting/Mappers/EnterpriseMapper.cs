@@ -45,7 +45,7 @@ namespace APISoP.CrossCutting.Mappers
         {
             return new ListEnterpriseDTO
             {
-                EnterpriseId = enterprise.EnterpriseId,
+                EnterpriseId = enterprise.EnterpriseId, 
                 Name = enterprise.Name,
                 Address = enterprise.Address,
                 Phone = enterprise.Phone,
