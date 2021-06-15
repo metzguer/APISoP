@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APISoP.CrossCutting.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace APiSoP.Services.CustomIdentity
     {
         bool UserLogged { get; }
         string UserName { get; }
+        TypeUser  typeUser {get;} 
         Guid? UserId { get; }
         Guid? EnterpriseId { get; }
         string EnterpriseName { get; }

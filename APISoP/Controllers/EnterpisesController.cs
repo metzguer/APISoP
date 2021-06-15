@@ -31,13 +31,24 @@ namespace APISoP.Controllers
 
         [HttpGet]
         public async Task<ActionResult> GetAll() {
-            var response = await _enterpriseService.GetAll(_userIDentity.MembershipId.Value);
 
-            var result = new ResultOperation<IEnumerable<ListEnterpriseDTO>>();
-            result.Success = response.Success;
-            result.Message = "Empressas registradas";
-            result.Result = response.Result.Select(x => EnterpriseMapper.GetListEnterprise(x)).ToList();
-            return Ok( response ); 
+            if (_userIDentity.typeUser == CrossCutting.Types.TypeUser.Owner)
+            {
+                var response = await _enterpriseService.GetAll(_userIDentity.MembershipId.Value); 
+                var result = new ResultOperation<IEnumerable<ListEnterpriseDTO>>();
+                result.Success = response.Success;
+                result.Message = "Empressas registradas";
+                result.Result = response.Result.Select(x => EnterpriseMapper.GetListEnterprise(x)).ToList();
+                return Ok(response);
+            }
+            else {
+                var response = await _enterpriseService.GetById(_userIDentity.EnterpriseId.Value); 
+                var result = new ResultOperation<ListEnterpriseDTO>();
+                result.Success = response.Success;
+                result.Message = "Empressas registradas";
+                result.Result = EnterpriseMapper.GetListEnterprise(response.Result);
+                return Ok(response);
+            } 
         } 
 
         [HttpGet("{id}")]
@@ -46,17 +57,34 @@ namespace APISoP.Controllers
             var valid = Guid.TryParse(id, out Guid idType);
 
             if (valid) {
-                var response = await _enterpriseService.GetById(Guid.Parse(id));
-                
-                if(!response.Success)
-                    return NotFound();
 
-                var result = new ResultOperation<DetailEnterpriseDTO>();
-                result.Success = response.Success;
-                result.Message = "Datos de la empresa";
-                result.Result = EnterpriseMapper.GetDetailEnterprise(response.Result);
+                if (_userIDentity.typeUser == CrossCutting.Types.TypeUser.Owner)
+                {
+                    var response = await _enterpriseService.GetEnterpriseAndStores(Guid.Parse(id));
 
-                return Ok( result );
+                    if (!response.Success)
+                        return NotFound();
+
+                    var result = new ResultOperation<DetailEnterpriseDTO>();
+                    result.Success = response.Success;
+                    result.Message = "Datos de la empresa";
+                    result.Result = EnterpriseMapper.GetDetailEnterprise(response.Result);
+
+                    return Ok(result);
+                }
+                else {
+                    var response = await _enterpriseService.GetById(Guid.Parse(id));
+
+                    if (!response.Success)
+                        return NotFound();
+
+                    var result = new ResultOperation<DetailEnterpriseDTO>();
+                    result.Success = response.Success;
+                    result.Message = "Datos de la empresa";
+                    result.Result = EnterpriseMapper.GetDetailEnterprise(response.Result);
+
+                    return Ok(result);
+                }
 
             } else {
                 return BadRequest("Ingresa un id valido");
@@ -107,9 +135,7 @@ namespace APISoP.Controllers
                     response.Errors = result.Errors;
                     return BadRequest(response);
                 }
-                   
-
-               
+                  
                 response.Success = result.Success;
                 response.Message = "Datos actualizados de la empresa";
                 response.Result = EnterpriseMapper.GetDetailEnterprise(result.Result);

@@ -32,6 +32,11 @@ namespace APISoP.Data.Repositories.CRUD
             return await _context.Enterprises.FirstOrDefaultAsync( x => x.EnterpriseId == guid);
         }
 
+        public async Task<Enterprise> GetEnterpriseAndStores(Guid id)
+        {
+            return await _context.Enterprises.Include( s => s.Stores).FirstOrDefaultAsync(x => x.EnterpriseId == id);
+        }
+
         public async Task Remove(Guid guid)
         {
             var entity = await GetById(guid);

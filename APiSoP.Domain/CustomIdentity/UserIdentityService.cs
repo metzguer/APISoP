@@ -1,4 +1,5 @@
 ﻿using APISoP.CrossCutting.Entities;
+using APISoP.CrossCutting.Types;
 using APISoP.Data.Contracts.CRUD;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -41,5 +42,7 @@ namespace APiSoP.Services.CustomIdentity
         public string StoreMoneyName => throw new NotImplementedException();
 
         public Guid? MembershipId => Guid.Parse(_httpContext.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "MembershipId").Value);
+
+        public TypeUser typeUser => (_httpContext.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "TypeUser").Value == "Owner") ? TypeUser.Owner : TypeUser.Guests;
     }
 }

@@ -94,6 +94,29 @@ namespace APiSoP.Domain.Services
 
             return result;
         }
+        public async Task<ResultOperation<Enterprise>> GetEnterpriseAndStores(Guid id)
+        {
+            var result = new ResultOperation<Enterprise>();
+
+            try
+            {
+                result.Result = await _enterpriseRepository.GetEnterpriseAndStores(id);
+                result.Success = true;
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Result = null;
+
+                result.Errors.Add(new ItemError
+                {
+                    Code = "Exception",
+                    Description = ex.Message
+                });
+            }
+
+            return result;
+        }
 
         public async Task<ResultOperation> Remove(Guid id)
         {

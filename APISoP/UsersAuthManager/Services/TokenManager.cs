@@ -25,12 +25,17 @@ namespace APISoP.UsersAuthManager.Services
         private readonly APIAuthDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUsersService _usersService;
-        public TokenManager(IOptionsMonitor<JwtConfig> jwtConfig, APIAuthDbContext context, UserManager<ApplicationUser> userManager, IUsersService usersService)
+        private readonly IEnterpriseService _enterpriseService;
+        private readonly IStoreService _storeService;
+        public TokenManager(IOptionsMonitor<JwtConfig> jwtConfig, APIAuthDbContext context, UserManager<ApplicationUser> userManager, 
+            IUsersService usersService, IEnterpriseService enterpriseService, IStoreService storeService)
         {
             _context = context;
             _jwtConfig = jwtConfig.CurrentValue;
             _userManager = userManager;
             _usersService = usersService;
+            _storeService = storeService;
+            _enterpriseService = enterpriseService;
         }
 
         public async Task<ResultTokensGenerated> JwtGenerateToken(User user)
@@ -46,6 +51,7 @@ namespace APISoP.UsersAuthManager.Services
                     Subject = new ClaimsIdentity(new[] {
                     new Claim("Id", user.UserId.ToString()),
                     new Claim("Username", user.Username),
+                    new Claim("TypeUser", user.TypeUser.ToString()),
                     new Claim("ProfileId", user.ProfileId.ToString()),
                     new Claim("ProfileName", user.Profile.Name),
                     new Claim("EnterpriseId", user.Store.EnterpriseId.ToString()),
@@ -57,7 +63,7 @@ namespace APISoP.UsersAuthManager.Services
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 }),
-                    Expires = DateTime.UtcNow.AddMinutes(20),
+                    Expires = DateTime.UtcNow.AddMinutes(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
@@ -70,8 +76,10 @@ namespace APISoP.UsersAuthManager.Services
                     isUsed = false,
                     isRevoked = false,
                     UserId = user.UserId.ToString(),
+                    EnterpriseId = user.Store.EnterpriseId.ToString(),
+                    StoreId = user.StoreId.ToString(),
                     AddedDate = DateTime.UtcNow,
-                    ExpiryDate = DateTime.UtcNow,
+                    ExpireDate = DateTime.UtcNow,
                     Token = $"{await RandomString.Generate(35)}{Guid.NewGuid()}"
                 };
 
@@ -112,15 +120,25 @@ namespace APISoP.UsersAuthManager.Services
                     return result;
                 }
 
-                var searchUser = await _usersService.GetUserForLogin( Guid.Parse(userApp.UserId) );
+                var searchUser = await _usersService.GetUserForLogin(Guid.Parse(userApp.UserId));
 
-                if (!searchUser.Success) {
+                if (!searchUser.Success)
+                {
                     result.Token = "";
                     result.RefreshToken = "";
                     result.Success = false;
                     result.Errors.Add("El usuario no existe");
                     return result;
                 }
+
+                var store = await _storeService.GetById(Guid.Parse(userApp.StoreId));
+                var enterprise = await _enterpriseService.GetById(Guid.Parse(userApp.EnterpriseId));
+
+                searchUser.Result.Store = store.Result;
+                searchUser.Result.StoreId = store.Result.StoreId;
+                searchUser.Result.Store.Enterprise = enterprise.Result;
+                searchUser.Result.Store.Enterprise.EnterpriseId = enterprise.Result.EnterpriseId;
+                //
 
                 var resultNewTokenCreated = await JwtGenerateToken(searchUser.Result);
 
