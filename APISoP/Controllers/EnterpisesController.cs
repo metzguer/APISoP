@@ -21,7 +21,7 @@ namespace APISoP.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EnterpisesController : ControllerBase
     {
-        private readonly IEnterpriseService _enterpriseService;
+        private readonly IEnterpriseService _enterpriseService; 
         private readonly IUserIdentity _userIDentity;
         public EnterpisesController(IEnterpriseService enterpriseService, IUserIdentity userIDentity)
         {
